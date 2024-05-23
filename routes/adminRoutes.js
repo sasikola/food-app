@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   allRestaurents,
+  singleRestaurent,
 } = require("../controllers/vendorController/restaurent");
 const { jwtAuthMiddleware } = require("../middleware/authMiddleware");
 const checkAdmin = require("../middleware/checkAdmin");
@@ -13,5 +14,6 @@ router.get("/users", jwtAuthMiddleware, checkAdmin, allUsers);
 router.get("/vendors", jwtAuthMiddleware, checkAdmin, allVendors);
 
 router.get("/allRestaurents", jwtAuthMiddleware, checkAdmin, allRestaurents);
+router.get("/restaurent/:id", jwtAuthMiddleware, checkAdmin, singleRestaurent);
 
 module.exports = router;

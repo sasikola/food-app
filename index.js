@@ -6,10 +6,8 @@ const cors = require("cors");
 const db = require("./db");
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
-const vendorRoute = require("./routes/vendorRoutes/restaurentRoute");
-const checkVendor = require("./middleware/checkVendor");
 const adminRoute = require("./routes/adminRoutes");
-const checkAdmin = require("./middleware/checkAdmin");
+const vendorRoute = require("./routes/vendorRoutes");
 
 dotenv.config();
 const port = process.env.PORT;

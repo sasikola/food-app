@@ -10,4 +10,6 @@ const allVendors = async (req, res) => {
   }
 };
 
+
+
 module.exports = { allVendors };

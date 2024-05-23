@@ -69,4 +69,24 @@ const allRestaurents = async (req, res) => {
   }
 };
 
-module.exports = { createRestaurent, allRestaurents };
+// fetch single restaurent by id
+
+const singleRestaurent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restaurent = await Restaurent.findById(id);
+    if (!restaurent) {
+      return res
+        .status(404)
+        .json({ message: "Restaurent not found!", success: false });
+    }
+    res
+      .status(200)
+      .json({ message: "Restaurent fetched successfully!", restaurent });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
+module.exports = { createRestaurent, allRestaurents, singleRestaurent };
