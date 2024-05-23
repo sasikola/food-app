@@ -89,4 +89,74 @@ const singleRestaurent = async (req, res) => {
   }
 };
 
-module.exports = { createRestaurent, allRestaurents, singleRestaurent };
+// delete restaurent
+
+const deleteRestaurent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restaurent = await Restaurent.findByIdAndDelete(id);
+    if (!restaurent) {
+      return res
+        .status(404)
+        .json({ message: "Restaurent not found!", success: false });
+    }
+    res
+      .status(200)
+      .json({ message: "Restaurent deleted successfully!", restaurent });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
+// update restaurent
+
+const updateRestaurent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      title,
+      address,
+      imageUrl,
+      foods,
+      timings,
+      pickup,
+      delivery,
+      isOpen,
+      logo,
+      coords,
+    } = req.body;
+    const restaurent = await Restaurent.findByIdAndUpdate(
+      id,
+      {
+        title,
+        address,
+        imageUrl,
+        foods,
+        timings,
+        pickup,
+        delivery,
+        isOpen,
+        logo,
+        coords,
+      },
+      { new: true }
+    );
+    if (!restaurent) {
+      return res
+        .status(404)
+        .json({ message: "Restaurent not found!", success: false });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
+module.exports = {
+  createRestaurent,
+  allRestaurents,
+  singleRestaurent,
+  deleteRestaurent,
+  updateRestaurent
+};
