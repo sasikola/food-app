@@ -6,6 +6,8 @@ const cors = require("cors");
 const db = require("./db");
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
+const vendorRoute = require("./routes/vendorRoutes/restaurentRoute");
+const checkVendor = require("./middleware/checkVendor");
 
 dotenv.config();
 const port = process.env.PORT;
@@ -26,8 +28,9 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/auth", authRoute)
-app.use("/user", userRoute)
+app.use("/auth", authRoute);
+app.use("/user", userRoute);
+app.use("/vendor", vendorRoute);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}!`);
