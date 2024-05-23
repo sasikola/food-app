@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const checkAdmin = async (req, res, next) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id;
     console.log(userId);
     if (!userId) {
       return res
@@ -15,7 +15,7 @@ const checkAdmin = async (req, res, next) => {
     if (!user) {
       return res.status(404).send({ message: "No User Found", success: false });
     }
-    if (!user.userType === "admin") {
+    if (user.userType !== "admin") {
       return res
         .status(403)
         .send({ message: "Access forbidden: Admins only", success: false });

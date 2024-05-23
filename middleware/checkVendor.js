@@ -15,7 +15,7 @@ const checkVendor = async (req, res, next) => {
     if (!user) {
       return res.status(404).send({ message: "No User Found", success: false });
     }
-    if (!user.userType === "vendor") {
+    if (user.userType !== "vendor") {
       return res
         .status(403)
         .send({ message: "Access forbidden: Vendors only", success: false });

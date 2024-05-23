@@ -8,6 +8,8 @@ const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const vendorRoute = require("./routes/vendorRoutes/restaurentRoute");
 const checkVendor = require("./middleware/checkVendor");
+const adminRoute = require("./routes/adminRoutes");
+const checkAdmin = require("./middleware/checkAdmin");
 
 dotenv.config();
 const port = process.env.PORT;
@@ -31,6 +33,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/vendor", vendorRoute);
+app.use("/admin", adminRoute);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}!`);

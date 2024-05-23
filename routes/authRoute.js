@@ -17,6 +17,6 @@ router.post("/vendor/register", vendorRegister);
 router.post("/vendor/login", vendorLogin);
 
 // admin login
-router.post("admin/login", adminLogin);
+router.post("/admin/login", adminLogin);
 
 module.exports = router;

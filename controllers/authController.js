@@ -169,7 +169,7 @@ const adminLogin = async (req, res) => {
   const { phone, password } = req.body;
 
   try {
-    const user = await User.findOne({ $or: [{ email }, { phone }] });
+    const user = await User.findOne( { phone } );
     if (!user || user.userType !== "admin")
       return res.status(400).json({ message: "Admin not found" });
 
@@ -182,7 +182,11 @@ const adminLogin = async (req, res) => {
       _id: user.id,
     };
     const token = generateToken(payload);
-    res.header("Authorization", `Bearer ${token}`).json({ token });
+    res.status(200).json({
+      message: "Admin Logged in successfully!",
+      token: token,
+      userDetails: user,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
