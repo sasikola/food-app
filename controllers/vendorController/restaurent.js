@@ -56,4 +56,18 @@ const createRestaurent = async (req, res) => {
   }
 };
 
-module.exports = { createRestaurent };
+// fetch all restaurents
+
+const allRestaurents = async (req, res) => {
+  try {
+    const restaurents = await Restaurent.find();
+    res
+      .status(200)
+      .json({ message: "Restaurents fetched successfully!", restaurents });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
+module.exports = { createRestaurent, allRestaurents };
