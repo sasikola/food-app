@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 
 const allUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    const users = await User.find({ userType: 'user' }).select("-password");
+
     res.json({ message: "Users fetched successfully!", users });
   } catch (err) {
     res.status(500).json({ message: "Internal server error", err });

@@ -57,7 +57,6 @@ const createRestaurent = async (req, res) => {
 };
 
 // fetch all restaurents
-
 const allRestaurents = async (req, res) => {
   try {
     const restaurents = await Restaurent.find();

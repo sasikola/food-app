@@ -10,8 +10,7 @@ const { jwtAuthMiddleware } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// route to get all users
-router.get("/users", jwtAuthMiddleware, allUsers);
+
 
 // route to ger profile data
 router.get("/profile", jwtAuthMiddleware, profile);
