@@ -81,6 +81,35 @@ const allFoods = async (req, res) => {
   }
 };
 
+// to get single food
+
+const singleFood = async (req, res) => {
+  try {
+    const food = await Food.findById(req.params.id)
+     .populate({
+        path: "reviews",
+        populate: {
+          path: "user",
+          select: "email",
+        },
+      })
+     .exec();
+    if (!food) {
+      return res
+       .status(404)
+       .json({ message: "Food not found!", success: false });
+    }
+    res.json({
+      message: "Food fetched successfully",
+      success: true,
+      food: food,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
 // to update food
 const updateFood = async (req, res) => {
   try {
@@ -125,4 +154,4 @@ const deleteFood = async (req, res) => {
   }
 };
 
-module.exports = { createFood, allFoods, updateFood, deleteFood };
+module.exports = { createFood, allFoods, updateFood, deleteFood, singleFood };

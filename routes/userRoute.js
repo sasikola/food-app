@@ -8,6 +8,7 @@ const {
 } = require("../controllers/userController");
 const { jwtAuthMiddleware } = require("../middleware/authMiddleware");
 const { allRestaurents, singleRestaurent } = require("../controllers/vendorController/restaurent");
+const { allFoods, singleFood } = require("../controllers/vendorController/food");
 
 const router = express.Router();
 
@@ -26,5 +27,9 @@ router.post("/resetPassword", resetPassword);
 // restaurent routes
 router.get("/restaurents", jwtAuthMiddleware, allRestaurents);
 router.get("/restaurent/:id", jwtAuthMiddleware, singleRestaurent);
+
+// routes for food
+router.get("/food/get", jwtAuthMiddleware, allFoods);
+router.get("/food/get/:id", jwtAuthMiddleware, singleFood);
 
 module.exports = router;
