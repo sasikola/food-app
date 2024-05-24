@@ -49,6 +49,9 @@ const restaurentSchema = new Schema(
     ratingCount: {
       type: String,
     },
+    reviews: {
+      type: String,
+    },
     code: {
       type: String,
     },
